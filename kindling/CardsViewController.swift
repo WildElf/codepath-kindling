@@ -9,10 +9,16 @@
 import UIKit
 
 class CardsViewController: UIViewController {
-
+    @IBOutlet var rec: UIPanGestureRecognizer!
+    
+    @IBOutlet weak var centerImage: UIImageView!
+    var initialcenter: CGPoint?
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+        rec.translationInView(centerImage)
+        initialcenter = centerImage.center
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -20,6 +26,16 @@ class CardsViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+    @IBAction func onSwipe(sender: UIPanGestureRecognizer) {
+//        centerImage.frame.offsetInPlace(dx: 5.0, dy: 0)
+        let translation = sender.translationInView(view)
+       //let point = sender.locationInView(self.view)
+    
+        //rec.setTranslation(translation, inView: centerImage)
+        centerImage.center = CGPointMake((initialcenter?.x)! + translation.x , (initialcenter?.y)!)
+        print("swiping")
+    }
 
+    
 }
 

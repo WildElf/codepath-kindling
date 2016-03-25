@@ -11,14 +11,22 @@ import UIKit
 class CardsViewController: UIViewController {
     @IBOutlet var rec: UIPanGestureRecognizer!
     
-    @IBOutlet weak var centerImage: UIImageView!
-    var initialcenter: CGPoint?
+	@IBOutlet weak var centerImage: DraggableImageView!
+
+	var initialcenter: CGPoint?
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
         rec.translationInView(centerImage)
         initialcenter = centerImage.center
+
+		let imageBounds = CGRectMake(40, 72, view.bounds.width, 304)
+		centerImage = DraggableImageView(frame: imageBounds)
+		//centerImage.frame = CGRectMake(40, 72, 100, 100)
+		centerImage.image = UIImage(named: "ryan")
+		centerImage.imageLabel.text = "Gosling"
+		view.addSubview(centerImage);
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -36,6 +44,5 @@ class CardsViewController: UIViewController {
         print("swiping")
     }
 
-    
 }
 
